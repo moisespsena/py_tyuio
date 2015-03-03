@@ -68,7 +68,7 @@ class Event(object):
         >>> class D1(EventDispatcher): pass
         >>> class D2(EventDispatcher): pass
         >>> d1 = D1()
-        ... <D1()>
+        ... <D1() >
         >>> d2 = D2()
         ... <D2()>
         >>> event = Event("my_type")
@@ -411,4 +411,5 @@ class EventDispatcher(object):
 
     def __repr__(self):
         return "<%s(%s)>" % (self.__class__.__name__,
-                             self._target and ('target=%r' % self._target) or '')
+                             self._target and \
+                             ('target=%r' % self._target) or'')
