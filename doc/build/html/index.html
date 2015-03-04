@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Tyuio’s documentation! &mdash; Tyuio 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Tyuio 1.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">Tyuio 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-tyuio-s-documentation">
+<h1>Welcome to Tyuio&#8217;s documentation!<a class="headerlink" href="#welcome-to-tyuio-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-tyuio"></span><p>Tyuio is a Simple Event Dispatcher api</p>
+<p>&#64;author: Moises P. Sena &lt;<a class="reference external" href="mailto:moisespsena&#37;&#52;&#48;gmail&#46;com">moisespsena<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;</p>
+<dl class="class">
+<dt id="tyuio.Event">
+<em class="property">class </em><tt class="descclassname">tyuio.</tt><tt class="descname">Event</tt><big>(</big><em>event_type</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#Event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.Event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>Generic Event object to use with EventDispatcher.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="s">&quot;my_type&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">Event</span><span class="p">(</span><span class="s">&quot;my_type&quot;</span><span class="p">))</span>
+<span class="go">my_type</span>
+<span class="go">&lt;Event(&#39;my_type&#39;)&gt;</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="tyuio.Event.current_target">
+<tt class="descname">current_target</tt><a class="reference internal" href="_modules/tyuio.html#Event.current_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.Event.current_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return last target object in <tt class="docutils literal"><span class="pre">self.targets</span></tt> list.
+:return: The target object</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyuio.Event.source_target">
+<tt class="descname">source_target</tt><a class="reference internal" href="_modules/tyuio.html#Event.source_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.Event.source_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return first target object in <tt class="docutils literal"><span class="pre">self.targets</span></tt> list.
+:return: The target object</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyuio.EventDispatcher">
+<em class="property">class </em><tt class="descclassname">tyuio.</tt><tt class="descname">EventDispatcher</tt><big>(</big><em>target=None</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>Generic event dispatcher which listen and dispatch events</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Target</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="s">&#39;&lt;</span><span class="si">%s</span><span class="s"> object&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">(</span><span class="n">Target</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">target</span>
+<span class="go">&lt;Target object&gt;</span>
+</pre></div>
+</div>
+<p>Add listeners:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_event_listeners</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_events_listeners</span><span class="p">((</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]))</span>
+<span class="go">&lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_events_listeners</span><span class="p">((</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]),</span>     <span class="p">(</span><span class="s">&#39;another_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]))</span>
+<span class="go">&lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="tyuio.EventDispatcher.add_event_listener">
+<tt class="descname">add_event_listener</tt><big>(</big><em>event_type</em>, <em>listener</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.add_event_listener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.add_event_listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one listener at event type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_type</strong> &#8211; The event type</li>
+<li><strong>listener</strong> &#8211; The listener</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.add_event_listeners">
+<tt class="descname">add_event_listeners</tt><big>(</big><em>event_type</em>, <em>*listeners</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.add_event_listeners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.add_event_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one or more listeners at event type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_type</strong> &#8211; The event type</li>
+<li><strong>listeners</strong> &#8211; The listener list</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_events_listeners</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">])</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.add_events_listeners">
+<tt class="descname">add_events_listeners</tt><big>(</big><em>*types_with_listeners</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.add_events_listeners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.add_events_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add multiples listeners on varios events types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>types_with_listeners</strong> &#8211; tuples of (event_type, listeners)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the <tt class="docutils literal"><span class="pre">self</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_events_listeners</span><span class="p">((</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]),</span> <span class="p">(</span><span class="s">&#39;another_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]))</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><em>event</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.dispatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch all listeners of <tt class="docutils literal"><span class="pre">event.type</span></tt></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event</strong> &#8211; The event object</li>
+<li><strong>args</strong> &#8211; Args to pass at listener function</li>
+<li><strong>kwargs</strong> &#8211; Keyword args to pass at listener function</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">event</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="s">&quot;my_type&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dispatcher</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">Event</span><span class="p">(</span><span class="s">&quot;my_type&quot;</span><span class="p">))</span>
+<span class="go">my_type</span>
+<span class="go">&lt;Event(&#39;my_type&#39;)&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.has_listener">
+<tt class="descname">has_listener</tt><big>(</big><em>event_type</em>, <em>listener</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.has_listener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.has_listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if dispatch contains the <tt class="docutils literal"><span class="pre">listener</span></tt> of <tt class="docutils literal"><span class="pre">event_type</span></tt> event type.
+:param event_type: The event type
+:param listener: The listener callback
+:return: <tt class="docutils literal"><span class="pre">True</span></tt> if contains, other else, <tt class="docutils literal"><span class="pre">False</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.on">
+<tt class="descname">on</tt><big>(</big><em>event_type</em>, <em>listener</em><big>)</big><a class="headerlink" href="#tyuio.EventDispatcher.on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one listener at event type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_type</strong> &#8211; The event type</li>
+<li><strong>listener</strong> &#8211; The listener</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.remove_all_listeners">
+<tt class="descname">remove_all_listeners</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.remove_all_listeners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.remove_all_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all events listeners
+:return: the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.remove_event_listener">
+<tt class="descname">remove_event_listener</tt><big>(</big><em>event_type</em>, <em>listener</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.remove_event_listener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.remove_event_listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove one listener at event type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_type</strong> &#8211; The event type</li>
+<li><strong>listener</strong> &#8211; The listener</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">remove_event_listener</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.remove_event_listeners">
+<tt class="descname">remove_event_listeners</tt><big>(</big><em>event_type</em>, <em>*listeners</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.remove_event_listeners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.remove_event_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove one or more listeners at event type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_type</strong> &#8211; The event type</li>
+<li><strong>listeners</strong> &#8211; The listener list</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the <tt class="docutils literal"><span class="pre">self</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">remove_events_listeners</span><span class="p">(</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">])</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyuio.EventDispatcher.remove_events_listeners">
+<tt class="descname">remove_events_listeners</tt><big>(</big><em>*types_with_listeners</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.remove_events_listeners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.remove_events_listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes multiples listeners on varios events types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>types_with_listeners</strong> &#8211; tuples of (event_type, listeners)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the <tt class="docutils literal"><span class="pre">self</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">EventDispatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">remove_events_listeners</span><span class="p">((</span><span class="s">&#39;my_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]),(</span><span class="s">&#39;another_event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">callback</span><span class="p">,</span> <span class="n">callback</span><span class="p">]))</span>
+<span class="go">&lt;EventDispatcher()&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyuio.EventDispatcher.target">
+<tt class="descname">target</tt><a class="reference internal" href="_modules/tyuio.html#EventDispatcher.target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventDispatcher.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyuio.EventType">
+<em class="property">class </em><tt class="descclassname">tyuio.</tt><tt class="descname">EventType</tt><big>(</big><em>evcls</em>, <em>evtype</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#EventType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.EventType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>The Event Type</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyuio.Listener">
+<em class="property">class </em><tt class="descclassname">tyuio.</tt><tt class="descname">Listener</tt><a class="reference internal" href="_modules/tyuio.html#Listener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.Listener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>Listener interface</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tyuio.is_iter">
+<tt class="descclassname">tyuio.</tt><tt class="descname">is_iter</tt><big>(</big><em>obj</em><big>)</big><a class="reference internal" href="_modules/tyuio.html#is_iter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyuio.is_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if obj contains &#8216;__iter__&#8217; attribute
+:param obj: the object of check
+:return: <tt class="docutils literal"><span class="pre">True</span></tt> if contains, other else, <tt class="docutils literal"><span class="pre">False</span></tt></p>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Tyuio&#8217;s documentation!</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">Tyuio 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Moises P. Sena.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

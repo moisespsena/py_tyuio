@@ -1,7 +1,8 @@
 .*
 *.pyc
-build
 dist
+build/*
+!build/html
 doc/build/*
 !doc/build/html
 *.egg-info

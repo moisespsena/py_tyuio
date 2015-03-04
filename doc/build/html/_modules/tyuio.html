@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tyuio &mdash; Tyuio 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Tyuio 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Tyuio 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tyuio</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Tyuio is a Simple Event Dispatcher api</span>
+
+<span class="sd">@author: Moises P. Sena &lt;moisespsena@gmail.com&gt;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<div class="viewcode-block" id="EventType"><a class="viewcode-back" href="../index.html#tyuio.EventType">[docs]</a><span class="k">class</span> <span class="nc">EventType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The Event Type</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evcls</span><span class="p">,</span> <span class="n">evtype</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evcls</span> <span class="o">=</span> <span class="n">evcls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evtype</span> <span class="o">=</span> <span class="n">evtype</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">evcls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">evtype</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;EventType(</span><span class="si">%r</span><span class="s">, </span><span class="si">%r</span><span class="s">)&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evcls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">evtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%r</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evcls</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">evtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">EventType</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">evcls</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">evcls</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">evtype</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">evtype</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+</div>
+<div class="viewcode-block" id="Event"><a class="viewcode-back" href="../index.html#tyuio.Event">[docs]</a><span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic Event object to use with EventDispatcher.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    &gt;&gt;&gt; dispatcher = EventDispatcher()</span>
+<span class="sd">    &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">    ...     print(e.type)</span>
+<span class="sd">    &gt;&gt;&gt; dispatcher.add_event_listener(&quot;my_type&quot;, callback)</span>
+<span class="sd">    &lt;EventDispatcher()&gt;</span>
+<span class="sd">    &gt;&gt;&gt; dispatcher.dispatch(Event(&quot;my_type&quot;))</span>
+<span class="sd">    my_type</span>
+<span class="sd">    &lt;Event(&#39;my_type&#39;)&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The constructor accepts an event type as string and a custom data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">event_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">called_listeners</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enter in new dispatch context</span>
+<span class="sd">        Enter in new dispatch context. Append current target in</span>
+<span class="sd">        ``self.targets`` list.</span>
+<span class="sd">        :return: The target object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; class D1(EventDispatcher): pass</span>
+<span class="sd">        &gt;&gt;&gt; class D2(EventDispatcher): pass</span>
+<span class="sd">        &gt;&gt;&gt; d1 = D1()</span>
+<span class="sd">        &gt;&gt;&gt; d2 = D2()</span>
+<span class="sd">        &gt;&gt;&gt; event = Event(&quot;my_type&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; with event(d1):</span>
+<span class="sd">        ...     print(event.source_target)</span>
+<span class="sd">        ...     print(event.current_target)</span>
+<span class="sd">        ...     print(event.targets)</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     with event(d2):</span>
+<span class="sd">        ...         print(event.source_target)</span>
+<span class="sd">        ...         print(event.current_target)</span>
+<span class="sd">        ...         print(event.targets)</span>
+<span class="sd">        &lt;D1()&gt;</span>
+<span class="sd">        &lt;D1()&gt;</span>
+<span class="sd">        [&lt;D1()&gt;]</span>
+<span class="sd">        &lt;D1()&gt;</span>
+<span class="sd">        &lt;D2()&gt;</span>
+<span class="sd">        [&lt;D1()&gt;, &lt;D2()&gt;]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return last inserted target object in ``self.targets`` list.</span>
+<span class="sd">        :return: The target object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add ``target`` for use it in ``with`` expression.</span>
+<span class="sd">        :param target: The new event target</span>
+<span class="sd">        :return: self event object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tmp_target</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Event.current_target"><a class="viewcode-back" href="../index.html#tyuio.Event.current_target">[docs]</a>    <span class="k">def</span> <span class="nf">current_target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return last target object in ``self.targets`` list.</span>
+<span class="sd">        :return: The target object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Event.source_target"><a class="viewcode-back" href="../index.html#tyuio.Event.source_target">[docs]</a>    <span class="k">def</span> <span class="nf">source_target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return first target object in ``self.targets`` list.</span>
+<span class="sd">        :return: The target object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;Event(</span><span class="si">%r</span><span class="s">)&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Listener"><a class="viewcode-back" href="../index.html#tyuio.Listener">[docs]</a><span class="k">class</span> <span class="nc">Listener</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Listener interface&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Listener invoker&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="is_iter"><a class="viewcode-back" href="../index.html#tyuio.is_iter">[docs]</a><span class="k">def</span> <span class="nf">is_iter</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check if obj contains &#39;__iter__&#39; attribute</span>
+<span class="sd">    :param obj: the object of check</span>
+<span class="sd">    :return: ``True`` if contains, other else, ``False``</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">&#39;__iter__&#39;</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="EventDispatcher"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher">[docs]</a><span class="k">class</span> <span class="nc">EventDispatcher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic event dispatcher which listen and dispatch events</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; d = EventDispatcher()</span>
+
+<span class="sd">    or</span>
+
+<span class="sd">    &gt;&gt;&gt; class Target(object):</span>
+<span class="sd">    ...     def __repr__(self):</span>
+<span class="sd">    ...         return &#39;&lt;%s object&gt;&#39; % self.__class__.__name__</span>
+<span class="sd">    &gt;&gt;&gt; d = EventDispatcher(Target())</span>
+<span class="sd">    &gt;&gt;&gt; d.target</span>
+<span class="sd">    &lt;Target object&gt;</span>
+
+<span class="sd">    Add listeners:</span>
+
+<span class="sd">    &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">    ...     pass</span>
+<span class="sd">    &gt;&gt;&gt; d.add_event_listener(&#39;my_event&#39;, callback)</span>
+<span class="sd">    &lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; d.add_event_listeners(&#39;my_event&#39;, callback, callback)</span>
+<span class="sd">    &lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; d.add_events_listeners((&#39;my_event&#39;, [callback, callback]))</span>
+<span class="sd">    &lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; d.add_events_listeners((&#39;my_event&#39;, [callback, callback]), \</span>
+<span class="sd">    (&#39;another_event&#39;, [callback, callback]))</span>
+<span class="sd">    &lt;EventDispatcher(target=&lt;Target object&gt;)&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Kwargs:</span>
+<span class="sd">        - target: The event target. Default is ``None``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_target</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="EventDispatcher.target"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.target">[docs]</a>    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target</span> <span class="ow">or</span> <span class="bp">self</span>
+</div>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove all listener references at destruction time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="EventDispatcher.has_listener"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.has_listener">[docs]</a>    <span class="k">def</span> <span class="nf">has_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if dispatch contains the ``listener`` of ``event_type`` event type.</span>
+<span class="sd">        :param event_type: The event type</span>
+<span class="sd">        :param listener: The listener callback</span>
+<span class="sd">        :return: ``True`` if contains, other else, ``False``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Check for event type and for the listener</span>
+        <span class="k">if</span> <span class="n">event_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">listener</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+</div>
+    <span class="k">def</span> <span class="nf">_invoke_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">listener</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">listener</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EventDispatcher.dispatch"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.dispatch">[docs]</a>    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dispatch all listeners of ``event.type``</span>
+
+<span class="sd">        :param event: The event object</span>
+<span class="sd">        :param args: Args to pass at listener function</span>
+<span class="sd">        :param kwargs: Keyword args to pass at listener function</span>
+<span class="sd">        :return: the ``event`` object</span>
+
+<span class="sd">        &gt;&gt;&gt; dispatcher = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     print(e.type)</span>
+<span class="sd">        &gt;&gt;&gt; dispatcher.add_event_listener(&quot;my_type&quot;, callback)</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &gt;&gt;&gt; dispatcher.dispatch(Event(&quot;my_type&quot;))</span>
+<span class="sd">        my_type</span>
+<span class="sd">        &lt;Event(&#39;my_type&#39;)&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">called_listeners</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c"># Dispatch the event to all the associated listeners </span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">:</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+            <span class="k">with</span> <span class="n">event</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">listener</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+                    <span class="n">event</span><span class="o">.</span><span class="n">called_listeners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
+                    <span class="c"># call listener and stop if returns False</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_invoke_listener</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+                                             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+                        <span class="k">break</span>
+        <span class="k">return</span> <span class="n">event</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.add_event_listener"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.add_event_listener">[docs]</a>    <span class="k">def</span> <span class="nf">add_event_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add one listener at event type</span>
+
+<span class="sd">        :param event_type: The event type</span>
+<span class="sd">        :param listener: The listener</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.add_event_listener(&#39;my_event&#39;, callback)</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Add listener to the event type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">listeners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">listeners</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+    <span class="n">on</span> <span class="o">=</span> <span class="n">add_event_listener</span>
+
+<div class="viewcode-block" id="EventDispatcher.add_event_listeners"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.add_event_listeners">[docs]</a>    <span class="k">def</span> <span class="nf">add_event_listeners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="o">*</span><span class="n">listeners</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add one or more listeners at event type</span>
+
+<span class="sd">        :param event_type: The event type</span>
+<span class="sd">        :param listeners: The listener list</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.add_events_listeners(&#39;my_event&#39;, [callback, callback])</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">listeners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">is_iter</span><span class="p">(</span><span class="n">listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="n">listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.add_events_listeners"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.add_events_listeners">[docs]</a>    <span class="k">def</span> <span class="nf">add_events_listeners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">types_with_listeners</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add multiples listeners on varios events types.</span>
+
+<span class="sd">        :param types_with_listeners: tuples of (event_type, listeners)</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.add_events_listeners((&#39;my_event&#39;, [callback, callback]), (&#39;another_event&#39;, [callback, callback]))</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types_with_listeners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">is_iter</span><span class="p">(</span><span class="n">types_with_listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">types_with_listeners</span> <span class="o">=</span> <span class="n">types_with_listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">types_with_listeners</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_event_listeners</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.remove_event_listener"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.remove_event_listener">[docs]</a>    <span class="k">def</span> <span class="nf">remove_event_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove one listener at event type</span>
+
+<span class="sd">        :param event_type: The event type</span>
+<span class="sd">        :param listener: The listener</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.remove_event_listener(&#39;my_event&#39;, callback)</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Remove the listener from the event type</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">listener</span><span class="p">):</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">listeners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c"># Only this listener remains so remove the key</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># Update listeners chain</span>
+                <span class="n">listeners</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span><span class="p">[</span><span class="n">event_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">listeners</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.remove_event_listeners"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.remove_event_listeners">[docs]</a>    <span class="k">def</span> <span class="nf">remove_event_listeners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="o">*</span><span class="n">listeners</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove one or more listeners at event type</span>
+
+<span class="sd">        :param event_type: The event type</span>
+<span class="sd">        :param listeners: The listener list</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.remove_events_listeners(&#39;my_event&#39;, [callback, callback])</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">listeners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">is_iter</span><span class="p">(</span><span class="n">listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="n">listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">listeners</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_event_listener</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.remove_events_listeners"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.remove_events_listeners">[docs]</a>    <span class="k">def</span> <span class="nf">remove_events_listeners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">types_with_listeners</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes multiples listeners on varios events types.</span>
+
+<span class="sd">        :param types_with_listeners: tuples of (event_type, listeners)</span>
+<span class="sd">        :return: the ``self`` object</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; d = EventDispatcher()</span>
+<span class="sd">        &gt;&gt;&gt; def callback(e, *args, **kwargs):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; d.remove_events_listeners((&#39;my_event&#39;, [callback, callback]),(&#39;another_event&#39;, [callback, callback]))</span>
+<span class="sd">        &lt;EventDispatcher()&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types_with_listeners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> \
+                <span class="n">is_iter</span><span class="p">(</span><span class="n">types_with_listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">types_with_listeners</span> <span class="o">=</span> <span class="n">types_with_listeners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">types_with_listeners</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_event_listeners</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="EventDispatcher.remove_all_listeners"><a class="viewcode-back" href="../index.html#tyuio.EventDispatcher.remove_all_listeners">[docs]</a>    <span class="k">def</span> <span class="nf">remove_all_listeners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove all events listeners</span>
+<span class="sd">        :return: the ``self`` object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_event_listeners</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_target</span> <span class="ow">and</span> \
+                             <span class="p">(</span><span class="s">&#39;target=</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Tyuio 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Moises P. Sena.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
