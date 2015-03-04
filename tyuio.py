@@ -85,7 +85,6 @@ class Event(object):
         <D1()>
         <D2()>
         [<D1()>, <D2()>]
-
         """
         assert self._tmp_target
         self.targets.append(self._tmp_target)
