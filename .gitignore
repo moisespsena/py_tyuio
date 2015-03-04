@@ -3,5 +3,6 @@
 build
 dist
 doc/build/*
+!doc/build/html
 *.egg-info
 *.egg

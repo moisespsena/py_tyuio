@@ -22,4 +22,4 @@ _cmd() {
 }
 
 _cmd python2
-#_cmd python3
+_cmd python3

@@ -29,6 +29,12 @@ class CleanCommand(Command):
             if re.search("(^(build|dist|__pycache__)$|\.egg-info)", f):
                 self.paths.append(f)
 
+        b = os.path.join(THIS_PATH, 'doc', 'build')
+
+        for f in os.listdir(b):
+            if b != 'html':
+                self.paths.append(os.path.join(b, f))
+
         for root, dirs, files in os.walk(THIS_PATH):
             for f in files:
                 if f.endswith(".pyc") or f.endswith(".pyc") or f.endswith(
