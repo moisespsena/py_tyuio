@@ -65,14 +65,12 @@ class Event(object):
 
         Example:
 
+        >>> from tyuio import EventDispatcher, Event
         >>> class D1(EventDispatcher): pass
         >>> class D2(EventDispatcher): pass
         >>> d1 = D1()
-        ... <D1() >
         >>> d2 = D2()
-        ... <D2()>
         >>> event = Event("my_type")
-        ... <Event('my_type')>
         >>> with event(d1):
         ...     print(event.source_target)
         ...     print(event.current_target)
