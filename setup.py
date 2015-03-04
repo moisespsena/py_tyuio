@@ -75,6 +75,7 @@ class TestCommand(Command):
             print("%s of %s tests failed!" % (failed, attemped))
 
 
+
 setup(
     name="tyuio",
     version="1.0",
@@ -86,6 +87,7 @@ setup(
     url="https://github.com/moisespsena/py_tyuio",
     long_description=read('README.md'),
     py_modules=['tyuio'],
+    setup_requires=['sphinx'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Topic :: Utilities",
@@ -94,7 +96,7 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
-#        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3",
     ],
     cmdclass={'clean': CleanCommand, 'test': TestCommand}
 )

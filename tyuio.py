@@ -38,7 +38,7 @@ class Event(object):
     Example:
 
     >>> dispatcher = EventDispatcher()
-    >>> def callback(e):
+    >>> def callback(e, *args, **kwargs):
     ...     print(e.type)
     >>> dispatcher.add_event_listener("my_type", callback)
     <EventDispatcher()>
@@ -65,7 +65,6 @@ class Event(object):
 
         Example:
 
-        >>> from tyuio import EventDispatcher, Event
         >>> class D1(EventDispatcher): pass
         >>> class D2(EventDispatcher): pass
         >>> d1 = D1()
@@ -166,14 +165,16 @@ class EventDispatcher(object):
 
     Add listeners:
 
-    >>> d.add_event_listener('my_event', lambda e: None)
+    >>> def callback(e, *args, **kwargs):
+    ...     pass
+    >>> d.add_event_listener('my_event', callback)
     <EventDispatcher(target=<Target object>)>
-    >>> d.add_event_listeners('my_event', lambda e: None, lambda e: None)
+    >>> d.add_event_listeners('my_event', callback, callback)
     <EventDispatcher(target=<Target object>)>
-    >>> d.add_events_listeners(('my_event', [lambda e: None, lambda e: None]))
+    >>> d.add_events_listeners(('my_event', [callback, callback]))
     <EventDispatcher(target=<Target object>)>
-    >>> d.add_events_listeners(('my_event', [lambda e: None, lambda e: None]), \
-    ('another_event', [lambda e: None, lambda e: None]))
+    >>> d.add_events_listeners(('my_event', [callback, callback]), \
+    ('another_event', [callback, callback]))
     <EventDispatcher(target=<Target object>)>
     """
 
@@ -220,7 +221,7 @@ class EventDispatcher(object):
         :return: the ``event`` object
 
         >>> dispatcher = EventDispatcher()
-        >>> def callback(e):
+        >>> def callback(e, *args, **kwargs):
         ...     print(e.type)
         >>> dispatcher.add_event_listener("my_type", callback)
         <EventDispatcher()>
@@ -253,7 +254,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.add_event_listener('my_event', lambda e: None)
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.add_event_listener('my_event', callback)
         <EventDispatcher()>
         """
         # Add listener to the event type
@@ -276,10 +279,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.add_events_listeners('my_event', [ \
-            lambda e: None, \
-            lambda e: None \
-        ])
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.add_events_listeners('my_event', [callback, callback])
         <EventDispatcher()>
         """
         if len(listeners) == 1 and is_iter(listeners[0]):
@@ -299,15 +301,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.add_events_listeners( \
-        ('my_event', [ \
-            lambda e: None, \
-            lambda e: None] \
-        ), \
-        ('another_event', [ \
-            lambda e: None, \
-            lambda e: None] \
-        ))
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.add_events_listeners(('my_event', [callback, callback]), ('another_event', [callback, callback]))
         <EventDispatcher()>
         """
         if len(types_with_listeners) == 1 and is_iter(types_with_listeners[0]):
@@ -328,7 +324,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.remove_event_listener('my_event', lambda e: None)
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.remove_event_listener('my_event', callback)
         <EventDispatcher()>
         """
         # Remove the listener from the event type
@@ -357,10 +355,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.remove_events_listeners('my_event', [ \
-            lambda e: None, \
-            lambda e: None \
-        ])
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.remove_events_listeners('my_event', [callback, callback])
         <EventDispatcher()>
         """
         if len(listeners) == 1 and is_iter(listeners[0]):
@@ -380,15 +377,9 @@ class EventDispatcher(object):
         Example:
 
         >>> d = EventDispatcher()
-        >>> d.remove_events_listeners( \
-        ('my_event', [ \
-            lambda e: None, \
-            lambda e: None] \
-        ), \
-        ('another_event', [ \
-            lambda e: None, \
-            lambda e: None] \
-        ))
+        >>> def callback(e, *args, **kwargs):
+        ...     pass
+        >>> d.remove_events_listeners(('my_event', [callback, callback]),('another_event', [callback, callback]))
         <EventDispatcher()>
         """
         if len(types_with_listeners) == 1 and \
@@ -410,4 +401,4 @@ class EventDispatcher(object):
     def __repr__(self):
         return "<%s(%s)>" % (self.__class__.__name__,
                              self._target and \
-                             ('target=%r' % self._target) or'')
+                             ('target=%r' % self._target) or '')
