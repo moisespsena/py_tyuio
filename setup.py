@@ -84,7 +84,7 @@ class TestCommand(Command):
 
 setup(
     name="tyuio",
-    version="0.1",
+    version="0.2",
     author="Moises P. Sena",
     author_email="moisespsena@gmail.com",
     description=("Tyuio is a Simple Event Dispatcher api."),
@@ -94,6 +94,7 @@ setup(
     long_description=read('README.md'),
     py_modules=['tyuio'],
     setup_requires=['sphinx'],
+    data_files=['README.md'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Utilities",
