@@ -12,7 +12,7 @@ Tyuio is a Simple Event Dispatcher api.
 INSTALL IT
 **********
 
-Install it using *pip* or *easy_install*::
+Install it using **pip** or **easy_install**::
 
     pip install tyuio
 
