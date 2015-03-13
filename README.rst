@@ -13,7 +13,9 @@ INSTALL IT
 **********
 
 Install it using *pip* or *easy_install*::
+
     pip install tyuio
 
 or::
+
     easy_install tyuio
