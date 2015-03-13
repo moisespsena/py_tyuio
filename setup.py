@@ -91,10 +91,8 @@ setup(
     license="GPLv2",
     keywords="event dispatcher",
     url="https://github.com/moisespsena/py_tyuio",
-    long_description=read('README.md'),
     py_modules=['tyuio'],
     setup_requires=['sphinx'],
-    data_files=['README.md'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Utilities",
