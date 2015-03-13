@@ -84,7 +84,7 @@ class TestCommand(Command):
 
 setup(
     name="tyuio",
-    version="0.3",
+    version="0.4",
     author="Moises P. Sena",
     author_email="moisespsena@gmail.com",
     description=("Tyuio is a Simple Event Dispatcher api."),
