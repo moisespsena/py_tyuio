@@ -1,4 +1,5 @@
 #!/usr/env/bin python
+import sys
 
 __author__ = 'moisespsena@gmail.com'
 
@@ -20,6 +21,13 @@ commands = [
     ['sdist', 'bdist_egg', 'upload'],
 ]
 
-for r in runnings:
-    for args in commands:
-        r(*args)
+py2('clean')
+py2('build_sphinx')
+
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'up':
+        for r in runnings:
+            for args in commands:
+                r(*args)
+    elif sys.argv[1] == 'docup':
+        py2('upload_sphinx')

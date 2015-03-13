@@ -84,18 +84,18 @@ class TestCommand(Command):
 
 setup(
     name="tyuio",
-    version="1.0",
+    version="0.1",
     author="Moises P. Sena",
     author_email="moisespsena@gmail.com",
     description=("Tyuio is a Simple Event Dispatcher api."),
-    license="BSD",
+    license="GPLv2",
     keywords="event dispatcher",
     url="https://github.com/moisespsena/py_tyuio",
     long_description=read('README.md'),
     py_modules=['tyuio'],
     setup_requires=['sphinx'],
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 4 - Beta",
         "Topic :: Utilities",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",

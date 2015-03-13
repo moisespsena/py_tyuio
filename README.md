@@ -1,7 +1,8 @@
 # py_tyuio
 Tyuio is a Simple Event Dispatcher api.
 
-Project page is https://github.com/moisespsena/py_tyuio
+Project page: https://github.com/moisespsena/py_tyuio
+Documentation page: https://pythonhosted.org/tyuio
 
 ## INSTALL IT
 
